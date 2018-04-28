@@ -1,8 +1,7 @@
 
 
 pycharm 激活  https://jetlicense.nss.im/
-
-
+ 
 
 
 漂亮汤
@@ -2112,7 +2111,7 @@ compile  span  group
     (0, 11)
     >>> m.span(1)                             # 返回第一个分组匹配成功的子串的索引
     (0, 5)
-    >>> m.span(2)                             # 返回第二个分组匹配成功的子串
+    >>> m.span(2)                             # 返回第二个分组匹配成功的子串的索引
     (6, 11)
 
     >>> m.group(0)                            # 返回匹配成功的整个子串
@@ -2123,6 +2122,12 @@ compile  span  group
     'World'
     >>> m.groups()                            # 等价于 (m.group(1), m.group(2), ...)
     ('Hello', 'World')
+   
+    groups()返回多个值的元组
+ 	
+
+ 	someRegexValue = re.compile('foo', re.IGNORECASE | re.DOTALL | re.VERBOSE) 
+                                         忽略大小写                   编写注释
    
 
 findall    
@@ -2136,7 +2141,9 @@ findall
     print(result2)
     
     结果：
-    ['88', '12']
+    ['88', '12']   没有分组 返回列表  
+                   有分组   返回元组的列表
+
 
 
 finditer
@@ -2154,9 +2161,42 @@ finditer
     3
 
 
+sub 
+
+>>> namesRegex = re.compile(r'Agent \w+')
+                     取代                         文本
+>>> namesRegex.sub('CENSORED', 'Agent Alice gave the secret documents to Agent Bob.')
+'CENSORED gave the secret documents to CENSORED'
+
+
+
 
 ^(.*):(.*)$   匹配 字典
  "\1" : "\2",
+
+
+'''
+
+电话
+
+(\d{3}|\(\d{3}\))?  
+(\s|-|\.)?  
+(\d{3})  
+(\s|-|\.)  
+(\d{4})  
+(\s*(ext|x|ext.)\s*(\d{2,5}))?
+
+
+邮箱
+
+[a-zA-Z0-9._%+-]+  
+@ # @ symbol
+[a-zA-Z0-9.-]+  
+(\.[a-zA-Z]{2,4}) 
+
+'''
+
+
 """
 [\u4e00-\u9fa5] 
 匹配中文字符
@@ -2192,6 +2232,11 @@ finditer
 匹配正浮点数
 ^-[1-9]\d*\.\d*|-0\.\d*[1-9]\d*$
 匹配负浮点数
+
+
+
+
+
 .  单个字符
 
 *  零次到n次
