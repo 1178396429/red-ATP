@@ -1407,6 +1407,76 @@ os.path.join()                     合成一个文件路径的字符串
 os.getcwd()                        获取当前路径 
 
 os.chdir('C:\\Windows\\System32')  切换路径
+"""
+.\  当前文件夹
+..\ 父级文件夹
+c:\ 绝对路径
+"""
+
+os.path.abspath(path)   返回参数的绝对路径的字符串
+os.path.isabs(path)， 参数是 绝对路径 True， 相对路径  False
+os.path.relpath(path, start)将返回从 start 路径到 path 的相对路径的字符串
+
+>>> os.path.abspath('.')
+'C:\\Python34'
+>>> os.path.abspath('.\\Scripts')
+'C:\\Python34\\Scripts'
+>>> os.path.isabs('.')
+False
+>>> os.path.isabs(os.path.abspath('.'))
+True
+
+
+
+分割路径
+
+！
+os.path.dirname(path)   最后一个斜杠之前的所有内容 
+
+os.path.basename(path)  最后一个斜杠之后的所有内容
+
+
+
+path = 'C:\\Windows\\System32\\calc.exe'
+os.path.basename(path)
+'calc.exe'
+
+os.path.dirname(path)
+'C:\\Windows\\System32'
+
+os.path.split(元组)    获取 目录名称和基本名称    dirname+basename=os.path.split
+
+>>> 元组 = 'C:\\Windows\\System32\\calc.exe'
+>>> os.path.split(元组)
+('C:\\Windows\\System32', 'calc.exe')
+
+
+
+os.path.sep 目录连接符 '\\'
+
+calcFilePath = 'C:\\Windows\\System32\\calc.exe'
+print(calcFilePath.split(    os.path.sep     ))
+['C:', 'Windows', 'System32', 'calc.exe']
+
+
+
+
+
+查看文件大小和文件夹内容 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
