@@ -35,7 +35,7 @@ xpath
  
 
 
-
+replace
 
 
 
@@ -1323,7 +1323,7 @@ set  集合----------------------------------------------
     f.close()       #文件关闭，无flush时，关闭文件内容才刷入硬盘
     
     
-    控制光标
+控制光标
     with open("test.txt",'r',encoding="UTF-8") as f:
         f.seek(4,0)   #第一个参数表示移动的相对位置，第二个参数为0表示移动到文件开头，1表示就在当前位置，2表示移动到文件末尾
         print(f.read())
@@ -1341,100 +1341,6 @@ set  集合----------------------------------------------
     file.name   返回文件的名称。
     file.softspace  如果用print输出后，必须跟一个空格符，则返回false。否则返回true。
 
-
-
-os.path  路径
-    os.path.join()                     合成一个文件路径的字符串
-    	>>> import os
-    	>>> os.path.join('usr', 'bin', 'spam')
-    	'usr\\bin\\spam'
-    	
-    os.getcwd()                        获取当前路径 
-    
-    os.chdir('C:\\Windows\\System32')  切换路径
-    """
-    .\  当前文件夹
-    ..\ 父级文件夹
-    c:\ 绝对路径
-    """
-    
-    判断检测  路径
-    
-    os.path.abspath(path)   返回参数的绝对路径的字符串
-    os.path.isabs(path)， 参数是 绝对路径 True， 相对路径  False
-    os.path.relpath(path, start)将返回从 start 路径到 path 的相对路径的字符串
-    
-    >>> os.path.abspath('.')
-    'C:\\Python34'
-    >>> os.path.abspath('.\\Scripts')
-    'C:\\Python34\\Scripts'
-    >>> os.path.isabs('.')
-    False
-    >>> os.path.isabs(os.path.abspath('.'))
-    True
-    
-    
-    >>> os.path.exists('C:\\Windows')                         
-    True
-    >>> os.path.exists('C:\\some_made_up_folder')             路径是否存在
-    False
-    >>> os.path.isdir('C:\\Windows\\System32')                是不是目录
-    True
-    >>> os.path.isfile('C:\\Windows\\System32')               是不是文件
-    False
-    >>> os.path.isdir('C:\\Windows\\System32\\calc.exe')
-    False
-    
-    
-    
-    
-    分割 路径
-    
-    ！
-    os.path.dirname(path)   最后一个斜杠之前的所有内容 
-    
-    os.path.basename(path)  最后一个斜杠之后的所有内容
-    
-    
-    
-    path = 'C:\\Windows\\System32\\calc.exe'
-    os.path.basename(path)
-    'calc.exe'
-    
-    os.path.dirname(path)
-    'C:\\Windows\\System32'
-    
-    os.path.split(元组)     获取 目录名称和基本名称    dirname+basename=os.path.split
-    
-    >>> 元组 = 'C:\\Windows\\System32\\calc.exe'
-    >>> os.path.split(元组)
-    ('C:\\Windows\\System32', 'calc.exe')
-    
-    
-    
-    os.path.sep 目录连接符 '\\'
-    
-    calcFilePath = 'C:\\Windows\\System32\\calc.exe'
-    print(calcFilePath.split(    os.path.sep     ))
-    ['C:', 'Windows', 'System32', 'calc.exe']
-    
-    
-    
-    
-    
-    查看文件大小和文件夹内容 
-    
-    os.path.getsize(path)  返回 path 参数中文件的字节数
-    os.path.getsize('Z:\\untitled\\1.py')  
-    
-    
-    
-    os.listdir(path)       返回 文件名 字符串的列表，
-    os.listdir('C:\\Windows\\System32')
-    ['tu.png', ' Icon.png', ' age.png']
-    
-    
-    
 
 shutil (shell 工具)   文件的 复制  移动 改名 删除    
 
@@ -1626,84 +1532,145 @@ os
         print('%10d  %s  %s%s' % (fsize, mtime, f, flag))
     
     
-    # 1.切换路径=============
-    d = os.getcwd()  #获取当前的工作路径
-    os.chdir('D:\\')#目录的切换
-    print(os.getcwd())
-    # (切换过去怎么回来呢？再chdir一下就回来了)
-    os.chdir(d)
-    print(os.getcwd())
-    
-    
-    
-    import os
-    环境变量函数
-        os.name
-        nt 表示window操作系统   posix表示 Linux mac 
-        
-        os.environ
-        显示系统的环境变量 以字典形式
-        
-    
-    
-        获取某个环境变量的值
-        'PATH': '/usr/bin/'
-        os.environ.get('PATH')
-        '/usr/bin/'
-    
-    
-    
-        os.path
-        <module 'ntpath' from 'C:\\ProgramData\\Anaconda3\\lib\\ntpath.py'>
-    
-    
-    
-    os.path.abspath('.')
-    'K:\\'    查看当前目录的绝对路径
-    
-    
-    os.path.join(os.path.abspath('.'), 'z','1')
-    'K:\\z\\1'    路径合成
+     
     
      
-    os.mkdir(os.path.join(os.path.abspath('.'), '新文件夹'))
-     创建文件夹
-    
-    
-    os.rmdir(os.path.join(os.path.abspath('.'), '新文件夹')) 
-    删除文件夹
-    
-    
-    os.path.split('C:/names/yob1895.txt')
-     ('C:/names', 'yob1895.txt')   
-     拆成  文件名  路径 两部分
     
     
     
+    os.getcwd()                                                获取当前的工作路径
+    os.chdir('C:\\Windows\\System32')                          切换路径
     
-    os.path.splitext('C:/names/yob1895.txt')
-    ('C:/names/yob1895', '.txt')
-     拆成  路径文件 文件扩展名   两部分
+    os.name                                                    环境变量函数  nt 表示window操作系统   posix表示 Linux mac 
+    os.environ                                                 显示系统的环境变量 以字典形式
+    os.environ.get('PATH')                                     获取某个环境变量的值   
+    os.path.abspath('.')'K:\\'                                 查看当前目录的绝对路径
+    os.path.join(os.path.abspath('.'), 'z','1')'K:\\z\\1'      路径合成
+    os.mkdir(os.path.join(os.path.abspath('.'), '新文件夹'))    创建文件夹
+    os.makedirs("1/1/1")                                       创建多级目录
+    os.rmdir(os.path.join(os.path.abspath('.'), '新文件夹'))    删除文件夹
+    os.rename('test.txt', 'test.py')                           重命名文件
+    os.remove('test.py')                                       删除文件    不存在时报错
+    os.listdir('.')                                            目录列表 包括文件
+    [x for x in os.listdir('.')]                               显示当前所有的文件夹
+    
+ 
+
+os.path  路径
+    os.path.join()                     合成一个文件路径的字符串
+        >>> import os
+        >>> os.path.join('usr', 'bin', 'spam')
+        'usr\\bin\\spam'
+
+    """
+    .\  当前文件夹
+    ..\ 父级文件夹
+    c:\ 绝对路径
+    """
+    
+判断检测  路径
+    
+    os.path.abspath(path)   返回参数的绝对路径的字符串
+    os.path.isabs(path)， 参数是 绝对路径 True， 相对路径  False
+    os.path.relpath(path, start)将返回从 start 路径到 path 的相对路径的字符串
+    
+    >>> os.path.abspath('.')
+    'C:\\Python34'
+    >>> os.path.abspath('.\\Scripts')
+    'C:\\Python34\\Scripts'
+    >>> os.path.isabs('.')
+    False
+    >>> os.path.isabs(os.path.abspath('.'))
+    True
     
     
-    os.rename('test.txt', 'test.py')
-    重命名文件
+    >>> os.path.exists('C:\\Windows')                         
+    True
+    >>> os.path.exists('C:\\some_made_up_folder')             路径是否存在
+    False
+    >>> os.path.isdir('C:\\Windows\\System32')                是不是目录
+    True
+    >>> os.path.isfile('C:\\Windows\\System32')               是不是文件
+    False
+    >>> os.path.isdir('C:\\Windows\\System32\\calc.exe')
+    False
     
     
-    os.remove('test.py')
-    删除文件    不存在时报错
     
     
-    os.getcwd()  显示当前程序的工作目录
-    os.chdir()   改变当前程序的工作目录
-    In [2]: os.getcwd()
-    Out[2]: 'C:\\Users\\njupt'
-    In [3]: os.chdir('C:\\wamp')
-    In [4]: os.getcwd()
-    Out[4]: 'C:\\wamp' 
+分割 路径
+    
+    ！
+    os.path.dirname(path)   返回目录所在的路径   去掉文件名 
+    
+    os.path.basename(path)  返回文件名          去掉目录路径
     
     
-     [x for x in os.listdir('.')]  显示当前所有的文件夹
+    
+    path = 'C:\\Windows\\System32\\calc.exe'
+    os.path.basename(path)
+    'calc.exe'
+    
+    os.path.dirname(path)
+    'C:\\Windows\\System32'
+
+    
+    splitdrive(元组)           返回 盘符    和 路径    
+    splitext(元组)             返回 文件名  和 扩展名            
+    os.path.split(元组)        返回 目录路径 和 文件名   dirname+basename=os.path.split
+    
+    >>> 元组 = 'C:\\Windows\\System32\\calc.exe'
+    >>> os.path.split(元组)
+    ('C:\\Windows\\System32', 'calc.exe')
+    
+
+    
+    os.path.sep 目录连接符 '\\'
+    
+    calcFilePath = 'C:\\Windows\\System32\\calc.exe'
+    print(calcFilePath.split(    os.path.sep     ))
+    ['C:', 'Windows', 'System32', 'calc.exe']
+    
+    
+    
+    
+    
+查看文件大小和文件夹内容 
+    
+    os.path.getsize(path)  返回 path 参数中文件的字节数
+    os.path.getsize('Z:\\untitled\\1.py')  
+    
+    
+    
+    os.listdir(path)       返回 文件名 字符串的列表，
+    os.listdir('C:\\Windows\\System32')
+    ['tu.png', ' Icon.png', ' age.png']
+    
+
+目录遍历器
+
+    遍历所有目录和文件名
+    import os
+    for ML, ZML, WJ in os.walk('Z:\\d\\Python\\A Byte of Python3(中文版)源码'):
+        print(ML)
+        for zi in ZML:
+            print( zi)
+        for w in WJ:
+            print(w)
+    
+        参数
+        os.walk(top[, topdown=True[, onerror=None[, followlinks=False]]])
+        
+        top -- 是你所要便利的目录的地址, 返回的是一个三元组(root,dirs,files)。
+        
+        root 所指的是当前正在遍历的这个文件夹的本身的地址
+        dirs 是一个 list ，内容是该文件夹中所有的目录的名字(不包括子目录)
+        files 同样是 list , 内容是该文件夹中所有的文件(不包括子目录)
+        topdown --可选，为 True，则优先遍历 top 目录，否则优先遍历 top 的子目录(默认为开启)。如果 topdown 参数为 True，walk 会遍历top文件夹，与top 文件夹中每一个子目录。
+        
+        onerror -- 可选， 需要一个 callable 对象，当 walk 需要异常时，会调用。
+        
+        followlinks -- 可选， 如果为 True，则会遍历目录下的快捷方式(linux 下是 symbolic link)实际所指的目录(默认关闭)。
     
 
 
