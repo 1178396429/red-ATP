@@ -148,7 +148,7 @@ requests
     Cookie：HTTP请求发送时，会将保存在该请求域名下所有的cookie值发送给服务器。
     
     Accept：告诉服务器，客户端支持的数据类型。
-     
+
     
     Accept-Charset：告诉服务器，客户端采用的编码。
     
@@ -1342,7 +1342,91 @@ set  集合----------------------------------------------
     file.softspace  如果用print输出后，必须跟一个空格符，则返回false。否则返回true。
 
 
-shutil (shell 工具)   文件的 复制  移动 改名 删除    
+https://nostarch.com/automatestuff/
+zipfile
+
+读取 ZIP 文件
+zipobj = zipfile.ZipFile('z.zip')       打开或者新建一个zip文件对象  默认读取
+namelist()                  文件和文件夹列表
+filename()                  文件名
+getinfo()                   指定文件的详细信息
+infolist()                  所有文件的信息
+printdir()                  打印路径 修改时间 大小
+file_size()                 文件大小
+compress_size()             压缩大小
+setpassword(pwd)            设置zip文档的密码。
+writestr()                  将二进制数据直接写入到压缩文档。
+zipfile.is_zipfile('samples/archive.zip')    判断 zip文件
+zip.read('bb/cc.txt').decode('utf-8')        是字节形式.需要解码回utf-8
+ 
+解压
+
+
+    例子：
+    例子将保存在程序根目录下的txt.zip内的所有文件解压到Z:\\Setup目录： 
+                  要解压的文件    保存在这里      解压密码
+    ZipFile.extract(  member   [, path        [, pwd]])
+    import zipfile, os
+    zipFile = zipfile.ZipFile(os.path.join(os.getcwd(), 'txt.zip'))
+    for file in zipFile.namelist():
+        zipFile.extract(file, 'Z:\\Setup')
+    zipFile.close()
+
+    解压到目录k
+    os.chdir('k:\\')
+    shutil.unpack_archive('Z:\\untitled\\ming.zip')
+
+创建和添加到zip
+
+创建zip文件
+    newZip = zipfile.ZipFile('new.zip', 'w')  
+将一个文件压缩到指定目录k
+    import zipfile,os
+    os.chdir('k:\\')
+    # 新建压缩包，放文件进去,若压缩包已经存在，将覆盖。可选择用a模式，追加
+    azip = zipfile.ZipFile('bb.zip', 'w')
+    # write 将已经存在的文件复制到压缩包，包括路径中的所有文件夹 文件,压缩算法LZMA
+    azip.write('Z:\\bb\\aa.txt', compress_type=zipfile.ZIP_LZMA)
+    # 写入一个新文件到压缩包中，data是该文件的具体内容，可以是str或者是byte。
+    # writestr是直接在压缩包里新建文件夹和文件，data参数是往该文件中写入的内容
+    azip.writestr('bb\\cc.txt', data='Hello World', compress_type=zipfile.ZIP_DEFLATED)
+    # 关闭资源
+    azip.close()
+
+将整个文件夹添加到压缩包中 
+    import zipfile,shutil,os
+    azip = zipfile.ZipFile('bb.zip', 'w')
+    for current_path, subfolders, filesname in os.walk(r'Z:\untitled\z'):
+        print(current_path, subfolders, filesname)
+        #  filesname是一个列表，我们需要里面的每个文件名和当前路径组合
+        for file in filesname:
+            # 将当前路径与当前路径下的文件名组合，就是当前文件的绝对路径
+            azip.write(os.path.join(current_path, file))
+    azip.close()
+
+    
+
+
+
+
+
+
+
+选择性拷贝
+遍历目录树，查找特定扩展名的文件（诸如.pdf 或.jpg）拷贝到新的文件夹中
+
+
+遍历目录树 找到最大的文件
+
+import os
+for root, dirs, files in os.walk('z:\\'):
+    for file in files:
+        file_name = os.path.join(root, file)
+        if os.path.getsize(file_name) > 1024*1024:
+            print(file_name)
+
+
+shutil (shell 工具)   文件的 复制  移动 改名 删除(send2trash) 
 
     复制文件             文件           目标地
      shutil.copy("Z:\\d\\GitHub.exe", "Z:\\e")
@@ -1375,6 +1459,11 @@ shutil (shell 工具)   文件的 复制  移动 改名 删除
     os.rmdir("Z:\\e")             文件夹必须为空
     shutil.rmtree("Z:\\e")        删除所有文件和文件夹
     
+
+            压缩       压缩后的文件名ming.zip      压缩格式      要压缩的文件夹
+    shutil.make_archive('Z:\\untitled\\ming',     'zip',      'Z:\\untitled\\z')
+            解压 bb.zip
+    shutil.unpack_archive(r'D:\bb.zip')
 
 
 内存读写
@@ -2150,12 +2239,13 @@ sys
     p-----pattern	匹配的正则表达式
     s-----string	要匹配的字符串。
     flags	标志位，是否区分大小写，多行匹配等等。
-    re.I 忽略大小写"""
-    re.L 表示特殊字符集 \w, \W, \b, \B, \s, \S 依赖于当前环境
-    re.M 多行模式
-    re.S 即为' . '并且包括换行符在内的任意字符（' . '不包括换行符）
+    
+    re.I IGNORECASE忽略大小写"""
+    re.L LOCALE 表示特殊字符集 \w, \W, \b, \B, \s, \S 依赖于当前环境
+    re.M MULTILINE多行模式
+    re.S DOTALL即为' . '并且包括换行符在内的任意字符（' . '不包括换行符）
     re.U 表示特殊字符集 \w, \W, \b, \B, \d, \D, \s, \S 依赖于 Unicode 字符属性数据库
-    re.X 为了增加可读性，忽略空格和' # '后面的注释"""
+    re.X VERBOSE为了增加可读性，忽略空格和' # '后面的注释"""
     
     
      match
