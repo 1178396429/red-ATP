@@ -2,7 +2,7 @@
 
 pycharm 激活  https://jetlicense.nss.im/
  
-
+Google96f10990029520
 
 漂亮汤
 urllib
@@ -19,7 +19,7 @@ urllib
 序列化 
 
 迭代器
-os
+os模块
 sys
 模块
 包
@@ -1413,17 +1413,85 @@ zip.read('bb/cc.txt').decode('utf-8')        是字节形式.需要解码回utf-
 
 
 选择性拷贝
-遍历目录树，查找特定扩展名的文件（诸如.pdf 或.jpg）拷贝到新的文件夹中
 
 
 遍历目录树 找到最大的文件
 
-import os
-for root, dirs, files in os.walk('z:\\'):
-    for file in files:
-        file_name = os.path.join(root, file)
-        if os.path.getsize(file_name) > 1024*1024:
-            print(file_name)
+    import os
+    for root, dirs, files in os.walk('z:\\'):
+        for file in files:
+            file_name = os.path.join(root, file)
+            if os.path.getsize(file_name) > 1024*1024:
+                print(file_name)
+
+查找指定后缀
+    import os, shutil
+    
+    file_dir = input("请输入要查找的目录")
+    file_dir = os.path.abspath(file_dir)
+    file_list = []
+    
+    if not os.path.exists(file_dir):
+        print("目录不存在")
+    else:
+        file_type = input("请输入要查找文件的扩展名")
+        file_type = file_type.lower()
+        for folder, subfolders, files in os.walk(file_dir):
+            for fi in files:
+                if fi.lower().endswith(file_type):
+                    file_list.append(os.path.join(folder,fi))
+    
+    #复制
+    cop = input("请输入存放文件袋目录：") 
+    cop = os.path.abspath(cop)
+    if not os.path.exists(cop):
+        print("目录不存在")
+    else:
+        for file in file_list:
+            shutil.copy(file,cop)
+    print("ok")
+
+
+    import shutil, os, re
+    filedir = "Z:\\s"
+    file_copy ="Z:\\e"
+    
+    ###使用正则表达式########
+    totle = 0    #用来计算符合条件的文件数
+    for n, f, file in os.walk(filedir):
+        if len(file) != 0:
+            filestr = ' '.join(file)
+            print(filestr)
+            filerex = re.findall(r'\S+.jpg|\S+.JPG', filestr)
+            print(filerex)
+            if len(filerex) != 0:
+                for i in filerex:
+                    filetotledir = n +'\\' + i
+                    print(filetotledir)
+                    shutil.copy(filetotledir, file_copy)
+                    totle += 1
+        else:
+            continue
+    print("总共找到 %d 个符合条件的文件" % totle)
+    
+    
+    #不使用正则
+    totle = 0    #用来计算符合条件的文件数
+    for n, f, file in os.walk(filedir):
+        if len(file) != 0:
+            for i in file:
+                if '.jpg' in i or  '.txt' in i:
+                    filetotledir = n +'\\' + i
+                    print(filetotledir)
+                    shutil.copy(filetotledir, file_copy)
+                    totle += 1
+        else:
+            continue
+    print("总共找到 %d 个符合条件的文件" % totle)
+    
+                      指定字符
+    # if filename.endswith('.txt') or filename.endswith('.pdf'):
+
 
 
 shutil (shell 工具)   文件的 复制  移动 改名 删除(send2trash) 
@@ -1599,7 +1667,7 @@ shelve模块
 
  
 
-os
+os模块
 
     打印当前目录下所有的文件名 文件大小  创建日期
     
@@ -1640,7 +1708,7 @@ os
     os.rmdir(os.path.join(os.path.abspath('.'), '新文件夹'))    删除文件夹
     os.rename('test.txt', 'test.py')                           重命名文件
     os.remove('test.py')                                       删除文件    不存在时报错
-    os.listdir('.')                                            目录列表 包括文件
+    os.listdir('.')                                            列出当前的文件夹名和文件名 不含子目录
     [x for x in os.listdir('.')]                               显示当前所有的文件夹
     
  
