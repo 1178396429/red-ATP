@@ -23,7 +23,8 @@ os模块
 sys
 模块
 包
-正则
+断言调试
+正则re
 xpath
 
 第一阶段: 《头发护理》《算法导论》《软件工程》《数据结构》《编译原理》  
@@ -616,8 +617,8 @@ requests
     tag.descendants        孙节点
     tag.parent             父节点
     
-    tag.next_sibling       上一个兄弟节点    
-    tag.previous_sibling   下一个兄弟节点   
+    tag.next_sibling       下一个兄弟节点    
+    tag.previous_sibling   上一个兄弟节点   
     
     
     .next_element          下一个元素节点
@@ -1304,10 +1305,13 @@ set  集合----------------------------------------------
     
     with open('test1.txt','w',encoding="UTF-8") as f:
         f.write("hello world!\n")  #文本模式，需添加换行符
+    
     with open('test1.txt','w',encoding="UTF-8") as f:
         f.writelines(["hello\n","world\n"])  #文本模式，需添加换行符
+    
     with open('test1.txt','wb') as f:
         f.write("hello world".encode("utf-8"))  #b模式需对字符先编码
+    
     with open("test1.txt",'wb') as f:
         f.writelines(["hello\n".encode("utf-8"),"world\n".encode("utf-8")]) #b模式需对字符串手动编码
     
@@ -1704,7 +1708,8 @@ os模块
     os.path.abspath('.')'K:\\'                                 查看当前目录的绝对路径
     os.path.join(os.path.abspath('.'), 'z','1')'K:\\z\\1'      路径合成
     os.mkdir(os.path.join(os.path.abspath('.'), '新文件夹'))    创建文件夹
-    os.makedirs("1/1/1")                                       创建多级目录
+    os.makedirs("1/1/1")   
+    os.makedirs('./image/', exist_ok=True)                                      创建多级目录
     os.rmdir(os.path.join(os.path.abspath('.'), '新文件夹'))    删除文件夹
     os.rename('test.txt', 'test.py')                           重命名文件
     os.remove('test.py')                                       删除文件    不存在时报错
@@ -2293,10 +2298,16 @@ sys
 
 
 
+断言调试
+
+    TypeError            类型错误    缺少参数
+    SyntaxError          语法错误    少括号 引号 点
+    NameError            名字错误    
+    ModuleNotFoundError  模块错误
+    
 
 
-
----------------------------------------------正则-----------------------------------------------------------------------------------
+---------------------------------------------正则re-----------------------------------------------------------------------------------
 正则是记录文本规则的代码   进行文本匹配的工具
 
     re.match(p, s  [, flags])        从首字母开始匹配 字符串包含子项  则成功 返回match对象 失败返回none  
