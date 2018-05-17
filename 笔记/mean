@@ -1,0 +1,106 @@
+人会注意到互联网不仅仅是虚拟
+
+基础平台从操作系统 (Linux) 转变为 JavaScript 运行时 (Node.js) 让操作系统变得独立
+
+
+Node.js  取代了   Apache 
+从MySQL 到 NoSQL 再到无架构的、以文档为导向的持久存储（如 MongoDB） 	
+	这些代表着持久化策略发生了根本性的转变。用户花费在编写 SQL 上的时间将会减少，
+	
+	将会有更多的时间编写 JavaScript 中的 mapReduce (映射化简)
+		映射化简 把一堆杂乱无章的数据按照某种特征归纳起来，然后处理并得到最后的结果
+		映射化简 为了解决其搜索引擎中大规模网页数据的并行化处理  
+		Hadoop是一个由Apache基金会所开发的分布式系统基础架构。用户可以在不了解分布式底层细节的情况下，开发分布式程序。充分利用集群的威力进行高速运算和存储。
+		Hadoop的框架最核心的设计就是：HDFS和MapReduce。HDFS为海量的数据提供了存储，则 MapReduce 为海量的数据提供了计算
+	
+	编写 RESTful Web 服务变得前所未有的容易。
+
+		RESTful 一种软件架构风格、设计风格，而不是标准，只是提供了一组设计原则和约束条件。它主要用于客户端和服务器交互类的软件
+ 
+从传统的服务器端页面生成变为客户端 单页面应用程序 
+
+从以页面为中心的应用程序视图转到面向组件的视图
+
+您访问的每个网站都是库、语言与 Web 框架的一种独特组合   小块松散组合
+
+
+GUI     图形用户界面
+CLI     命令行界面
+PVM     并行虚拟机
+NPM     包管理工具
+SPA     单页应用程序
+Grunt   一个Javascript任务运行器。
+
+
+
+MVC     MVVM开发模式 前后端各负其责
+ajax    重前端 业务逻辑全部在本地操作，数据都需要通过AJAX同步、提交
+路由    在URL中采用#号来作为当前视图的地址,
+	    改变#号后的参数，页面并不会重载
+
+
+
+
+
+
+MongoDB + Express +AngularJS + NodeJS
+
+NPM – NodeJS包管理器，类似Java的Maven。
+Grunt – 一个Javascript任务运行器。
+
+mean安装目录：
+app                    包含控制器, 模型 和视图 
+	controllers
+	models
+	routes             路由
+	views
+		includes       包含页面的头部和尾部模板，能够插入这个应用的所有页面
+			foot.html
+			head.html
+		layouts        页面布局的文件
+		users          用户注册 登录和授权有关页面。
+			404.html
+			500.html
+			index.html
+config                 包含各种配置文件  控制应用行为部分的文件 Node.JS部分
+	env
+		config.js
+		express.js
+		passport.js
+
+node_modules
+
+public                  客户端部分在public目录下
+	css
+	img
+	js                  包含了Angular代码
+	lib                 lib目录是Angular的代码库 
+	views
+		humans.txt
+		robots.txt 		网络是为人类设置的...
+						只有一个专为搜索引擎准备的的robots.txt文件。
+						为什么不为我们自己也配备一个文件？  
+test
+	bower.json
+	gruntfile.js
+	package.json
+	procfile
+	readme.md
+	server.js           Node.JS部分 启动整个应用的文件
+							加载配置：配置应用自身 授权 和数据库连接的 加载。
+							引导模型：这是通过遍历模型目录实现的，加载其下面所有文件。包括子目录。
+							启动passport
+							初始化express
+							配置express
+							配置express路由
+							在指定端口启动服务器
+
+
+
+http://www.jdon.com/idea/js/mean.html以上
+服务器后端 三个目录  app config server.js
+app目录中驻扎着整个后端的代码
+
+
+
+Mongo DB很好的实现了面向对象的思想(OO思想)，在Mongo DB中每一条记录都是一个Document对象。Mongo DB最大的优势在于所有的数据持久操作都无需开发人员手动编写SQL语句，直接调用方法就可以轻松的实现CRUD操作。

@@ -35,8 +35,8 @@ xpath
 
  
 
-
-replace
+对象调用方法
+ 
 
 
 
@@ -1346,24 +1346,28 @@ set  集合----------------------------------------------
     file.softspace  如果用print输出后，必须跟一个空格符，则返回false。否则返回true。
 
 
+
+
+
+
 https://nostarch.com/automatestuff/
 zipfile
 
-读取 ZIP 文件
-zipobj = zipfile.ZipFile('z.zip')       打开或者新建一个zip文件对象  默认读取
-namelist()                  文件和文件夹列表
-filename()                  文件名
-getinfo()                   指定文件的详细信息
-infolist()                  所有文件的信息
-printdir()                  打印路径 修改时间 大小
-file_size()                 文件大小
-compress_size()             压缩大小
-setpassword(pwd)            设置zip文档的密码。
-writestr()                  将二进制数据直接写入到压缩文档。
-zipfile.is_zipfile('samples/archive.zip')    判断 zip文件
-zip.read('bb/cc.txt').decode('utf-8')        是字节形式.需要解码回utf-8
- 
-解压
+    读取 ZIP 文件
+    zipobj = zipfile.ZipFile('z.zip')       打开或者新建一个zip文件对象  默认读取
+    namelist()                  文件和文件夹列表
+    filename()                  文件名
+    getinfo()                   指定文件的详细信息
+    infolist()                  所有文件的信息
+    printdir()                  打印路径 修改时间 大小
+    file_size()                 文件大小
+    compress_size()             压缩大小
+    setpassword(pwd)            设置zip文档的密码。
+    writestr()                  将二进制数据直接写入到压缩文档。
+    zipfile.is_zipfile('samples/archive.zip')    判断 zip文件
+    zip.read('bb/cc.txt').decode('utf-8')        是字节形式.需要解码回utf-8
+     
+    解压
 
 
     例子：
@@ -1379,12 +1383,12 @@ zip.read('bb/cc.txt').decode('utf-8')        是字节形式.需要解码回utf-
     解压到目录k
     os.chdir('k:\\')
     shutil.unpack_archive('Z:\\untitled\\ming.zip')
+    
+    创建和添加到zip
 
-创建和添加到zip
-
-创建zip文件
-    newZip = zipfile.ZipFile('new.zip', 'w')  
-将一个文件压缩到指定目录k
+    创建zip文件
+        newZip = zipfile.ZipFile('new.zip', 'w')  
+    将一个文件压缩到指定目录k
     import zipfile,os
     os.chdir('k:\\')
     # 新建压缩包，放文件进去,若压缩包已经存在，将覆盖。可选择用a模式，追加
@@ -1396,8 +1400,8 @@ zip.read('bb/cc.txt').decode('utf-8')        是字节形式.需要解码回utf-
     azip.writestr('bb\\cc.txt', data='Hello World', compress_type=zipfile.ZIP_DEFLATED)
     # 关闭资源
     azip.close()
-
-将整个文件夹添加到压缩包中 
+    
+    将整个文件夹添加到压缩包中 
     import zipfile,shutil,os
     azip = zipfile.ZipFile('bb.zip', 'w')
     for current_path, subfolders, filesname in os.walk(r'Z:\untitled\z'):
@@ -1407,19 +1411,10 @@ zip.read('bb/cc.txt').decode('utf-8')        是字节形式.需要解码回utf-
             # 将当前路径与当前路径下的文件名组合，就是当前文件的绝对路径
             azip.write(os.path.join(current_path, file))
     azip.close()
-
+        
     
-
-
-
-
-
-
-
-选择性拷贝
-
-
-遍历目录树 找到最大的文件
+    
+    遍历目录树 找到最大的文件
 
     import os
     for root, dirs, files in os.walk('z:\\'):
@@ -1427,8 +1422,8 @@ zip.read('bb/cc.txt').decode('utf-8')        是字节形式.需要解码回utf-
             file_name = os.path.join(root, file)
             if os.path.getsize(file_name) > 1024*1024:
                 print(file_name)
-
-查找指定后缀
+    
+    查找指定后缀
     import os, shutil
     
     file_dir = input("请输入要查找的目录")
@@ -1662,14 +1657,63 @@ shelve模块
     str 变 字典
     
     
-    
+csv
+csv表示 （逗号分隔的值） 
+csv文件是简化的电子表格，保存为纯文本文件    
+
+CSV 文件中的每行代表电子表格中的一行，逗号分割了该行中的单元格   值没有类型，所有东西都是字符串； 没有字体大小或颜色 宽度和高度；没有多个工作表； 不能合并单元格；不能嵌入图像或图表
+
+import csv,os
+os.chdir('Z:\\e')
+exampleFile = open('csv.csv')  
+exampleReader = csv.reader(exampleFile)
+exampleData = list(exampleReader)
+print(exampleData)
+结果：
+[
+ ['4/5/2015 13:34', 'Apples', '73'],
+ ['4/5/2015 3:41', 'Cherries', '85'],
+ ['4/6/2015 12:46', 'Pears', '14'],
+ ['4/8/2015 8:59', 'Oranges', '52'],
+ ['4/10/2015 2:07', 'Apples', '152'],
+ ['4/10/2015 18:10', 'Bananas', '23'],
+ ['4/10/2015 2:40', 'Strawberries', '98']
+]
+
+>>> exampleData[1][1]
+'Cherries'
+>>> exampleData[6][1]
+'Strawberries'
+
+exampleData[row][col] row 是 exampleData 中一个列表的下标， col 是该列表中你想访问的项的下标
+
+exampleData[0][0]进入第一个列表，并给出第一个字符串。exampleData[0][2]进入
+第一个列表，并给出第三个字符串 
+
+for row in exampleReader:
+                            行数                 
+   print( str(exampleReader.line_num) + ' ' + str(row))
+
+    1 ['4/5/2015 13:34',  'Apples', '73']
+    2 ['4/5/2015 3:41',   'Cherries', '85']
+    3 ['4/6/2015 12:46',  'Pears', '14']
+    4 ['4/8/2015 8:59',   'Oranges', '52']
+    5 ['4/10/2015 2:07',  'Apples', '152']
+    6 ['4/10/2015 18:10', 'Bananas', '23']
+    7 ['4/10/2015 2:40',  'Strawberries', '98']
 
 
+写  csv.writer()
 
+outputFile = open('output.csv', 'w', newline='')  #创建文件
+outputWriter = csv.writer(outputFile)             
+outputWriter.writerow(['Hello, world!', 'eggs', 'bacon', 'ham']) 
+outputWriter.writerow([1, 2, 3.141592, 4])
+outputFile.close()
 
-
-
- 
+      不常用制表符                     以制表符分割     终止符是'\n\n'  两倍间距           
+outputWriter = csv.writer(outputFile, delimiter='\t', lineterminator='\n\n')
+单元格是由制表符分隔的，我们就使用文件扩展名.tsv，表示制表符分隔的值
 
 os模块
 
